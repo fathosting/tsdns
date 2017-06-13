@@ -31,6 +31,8 @@ COPY docker-entrypoint.sh /usr/local/bin/
 ENV TS3_VERSION 3.0.13.6
 RUN curl -s http://dl.4players.de/ts/releases/${TS3_VERSION}/teamspeak3-server_linux_amd64-${TS3_VERSION}.tar.bz2 | tar -jx -C /home/teamspeak
 
+COPY updater.py /home/teamspeak/teamspeak3-server_linux_amd64/tsdns
+
 EXPOSE 41144/tcp
 
 ENTRYPOINT ["docker-entrypoint.sh"]
