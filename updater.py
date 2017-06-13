@@ -5,7 +5,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 class MyHandler(BaseHTTPRequestHandler):
   def do_GET(self):
-    subprocess.run(["./tsdnsserver", "--update"])
+    subprocess.call(["./tsdnsserver", "--update"])
     self.send_response(200)
     return
 
