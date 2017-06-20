@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 
-import subprocess
+import os, subprocess
+import urllib
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
+settings_filepath = "/home/teamspeak/teamspeak3-server_linux_amd64/tsdns/tsdns_settings.ini"
 
 class MyHandler(BaseHTTPRequestHandler):
   def do_GET(self):
+    testfile = urllib.URLopener()
+    testfile.retrieve(os.environ.get('MEH_MAP_URL'), settings_filepath)
+
     subprocess.call(["./tsdnsserver", "--update"])
     self.send_response(200)
     return
