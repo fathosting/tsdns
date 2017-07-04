@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import os, subprocess
-from urllib.request
+import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 settings_filepath = "/home/teamspeak/teamspeak3-server_linux_amd64/tsdns/tsdns_settings.ini"
