@@ -9,15 +9,20 @@ import subprocess
 settings_filepath = "/home/teamspeak/teamspeak3-server_linux_amd64/tsdns/tsdns_settings.ini"
 
 class MyHandler(BaseHTTPRequestHandler):
+  def do_GET(self):
+    self.send_header('Content-type', 'text/html')
+    self.end_headers()
+    self.send_response(200)
+    self.wfile.write(b'OK')
+
   def do_POST(self):
     urllib.request.urlretrieve(os.environ.get('MEH_MAP_URL'), settings_filepath)
     subprocess.call(["./tsdnsserver", "--update"])
 
-    self.send_response(200)
     self.send_header('Content-type', 'text/html')
     self.end_headers()
+    self.send_response(200)
     self.wfile.write(b'OK')
-    return
 
 if __name__ == '__main__':
   if not os.environ.get('MEH_MAP_URL'):
