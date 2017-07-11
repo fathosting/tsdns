@@ -7,7 +7,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 settings_filepath = "/home/teamspeak/teamspeak3-server_linux_amd64/tsdns/tsdns_settings.ini"
 
 class MyHandler(BaseHTTPRequestHandler):
-  def do_GET(self):
+  def do_POST(self):
     urllib.request.urlretrieve(os.environ.get('MEH_MAP_URL'), settings_filepath)
     subprocess.call(["./tsdnsserver", "--update"])
 
