@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-import os, subprocess
-import urllib.request
+import os
+import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import urllib.request
+import subprocess
 
 settings_filepath = "/home/teamspeak/teamspeak3-server_linux_amd64/tsdns/tsdns_settings.ini"
 
@@ -18,8 +20,13 @@ class MyHandler(BaseHTTPRequestHandler):
     return
 
 if __name__ == '__main__':
+  if not os.environ.get('MEH_MAP_URL'):
+    sys.exit('please provide MEH_MAP_URL environement variable. Abording...')
+
   server_address = ('0.0.0.0', 8080)
   httpd = HTTPServer(server_address, MyHandler)
+
+  print ('Server listening on %s:%s' % (server_address[0], server_address[1]))
   try:
     httpd.serve_forever()
   except KeyboardInterrupt:
